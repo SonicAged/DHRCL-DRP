@@ -1,0 +1,53 @@
+optimizer:
+  k_folds: 5
+  n_repeats: 5
+  device: "cuda:0"
+  lr: 0.001
+  lambda_drug: 1
+  lambda_cellline: 0.5
+  seed: 114514
+  save_model: True
+  save_path: "../save/HARSH-CDR/"
+  save_tensor: True
+
+model:
+  name: HARSH-CDR
+  hidden_channels: 128
+  output_channels: 100
+  num_scales: 7
+  k: 7
+  beta: 1.1
+  theta: 2
+  dim_feat: 100
+  omics: ["mutation", "gexpr", "methylation"]
+data:
+  - name: "CCLE"
+    epochs: 1000
+    drug:
+      features: "../data/CCLE/CCLE_smiles.csv"
+      tensor: "../data/Tensor/CCLE/drug_set.pt"
+    genomic:
+      mutation: "../data/Celline/genomic_mutation_34673_demap_features.csv"
+      expression: "../data/Celline/genomic_expression_561celllines_697genes_demap_features.csv"
+      methylation: "../data/Celline/genomic_methylation_561celllines_808genes_demap_features.csv"
+    cell_line:
+      tensor: "../data/Tensor/CCLE/cellline_set.pt"
+    cancer:
+      response: "../data/CCLE/CCLE_response.csv"
+    allpairs: "../data/CCLE/allpairs.npy"
+  - name: "GDSC"
+    epochs: 2000
+    drug:
+      info: "../data/Drug/1.Drug_listMon Jun 24 09_00_55 2019.csv"
+      thresholds: "../data/Drug/drug_threshold.txt"
+      features: "../data/Drug/drug_graph_feat"
+      tensor: "../data/Tensor/GDSC/drug_set.pt"
+    cell_line:
+      info: "../data/Celline/Cell_lines_annotations.txt"
+      genomic:
+        mutation: "../data/Celline/genomic_mutation_34673_demap_features.csv"
+        expression: "../data/Celline/genomic_expression_561celllines_697genes_demap_features.csv"
+        methylation: "../data/Celline/genomic_methylation_561celllines_808genes_demap_features.csv"
+      response: "../data/Celline/GDSC_IC50.csv"
+      tensor: "../data/Tensor/GDSC/cellline_set.pt"
+    allpairs: "../data/GDSC/allpairs.npy"

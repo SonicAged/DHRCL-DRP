@@ -1,0 +1,9 @@
+**__pycache__**
+**/*.pt
+/test/**
+*.pkl
+*_test.py
+*.ipynb
+*.csv
+*_fea.*
+/submodel/**
