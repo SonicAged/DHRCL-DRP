@@ -1,13 +1,5 @@
-import numpy as np
-import csv
-import pandas as pd
-import os
-import pickle
 from typing import Dict, Tuple
 from pathlib import Path
-
-from rdkit import Chem
-import deepchem as dc
 
 from myutils.dataloader.GDSC import DataLoader as GDSCDataLoader
 from myutils.dataloader.CCLE import DataLoader as CCLEDataLoader
@@ -20,7 +12,8 @@ def load_data(files: Dict) -> Tuple:
         files: Data file configuration dictionary
         
     Returns:
-        Tuple of drug features, mutation features, gene expression features, methylation features, data, number of cell lines, number of drugs
+        Tuple of drug features, mutation features, gene expression features, 
+        methylation features, data, number of cell lines, number of drugs
         
     Raises:
         NotImplementedError: If the dataset name is not supported
